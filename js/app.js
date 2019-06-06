@@ -2,19 +2,23 @@ registrar.onclick = function () {
   var email = document.getElementById("email1").value;
   var psd = document.getElementById("contrasena1").value;
 
-  firebase.auth().createUserWithEmailAndPassword(email, psd).catch(function (error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ...
-  });
+  firebase.auth().createUserWithEmailAndPassword(email, psd)
+    .then(function () {
+      confirmar();
+    })
+    .catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+    });
 }
 
 conectar.onclick = function () {
   var email = document.getElementById("email2").value;
   var psd = document.getElementById("contrasena2").value;
 
-  firebase.auth().signInWithEmailAndPassword(email, psd).catch(function(error) {
+  firebase.auth().signInWithEmailAndPassword(email, psd).catch(function (error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -25,21 +29,22 @@ conectar.onclick = function () {
   });
 }
 
-function observador(){
-  firebase.auth().onAuthStateChanged(function(user) {
+function observador() {
+  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       console.log("Existe usuario activo.");
-      contenidosUsuarioRegistrado();
+      contenidosUsuarioRegistrado(user);
       // User is signed in.
       var displayName = user.displayName;
       var email = user.email;
-      console.log(user);
       var emailVerified = user.emailVerified;
       var photoURL = user.photoURL;
       var isAnonymous = user.isAnonymous;
       var uid = user.uid;
       var providerData = user.providerData;
       // ...
+
+      console.log("Usuario Verificado: " + emailVerified);
     } else {
       // User is signed out.
       console.log("No existe ningún usuario activo.");
@@ -48,25 +53,38 @@ function observador(){
 }
 observador();
 
-function contenidosUsuarioRegistrado(){
-  var contenido = document.getElementById("contenido");
-  contenido.innerHTML = `
+function contenidosUsuarioRegistrado(usuario) {
+  if (usuario.emailVerified) {
+    var contenido = document.getElementById("contenido");
+    contenido.innerHTML = `
   <p>¡Bienvenido!</p>
   <button id="cerrar">Cerrar sesión</button>
   `;
 
-  var ce = document.getElementById("cerrar");
-  ce.addEventListener("click", cerrar, false);
-
+    var ce = document.getElementById("cerrar");
+    ce.addEventListener("click", cerrar, false);
+  }
 }
 
-function cerrar(){
+function cerrar() {
   firebase.auth().signOut()
-  .then(function(){
-    console.log("Saliendo...");
-    contenido.innerHTML = "";
-  })
-  .catch(function(error){
+    .then(function () {
+      console.log("Saliendo...");
+      contenido.innerHTML = "";
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+function confirmar() {
+  var user = firebase.auth().currentUser;
+
+  user.sendEmailVerification().then(function () {
+    // Email sent.
+    console.log("Enviando correo...");
+  }).catch(function (error) {
+    // An error happened.
     console.log(error);
   });
 }
