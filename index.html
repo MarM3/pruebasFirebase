@@ -6,53 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hola Mundo Firebase</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
-    <h1>Hola mundo Firebase - Usuarios</h1>
+    <div class="container mt-3">
+        <nav class="navbar navbar-dark bg-primary justify-content-between">
+            <a class="navbar-brand">Usuarios</a>
+            <div class="form-inline">
+                <input id="email2" type="email" placeholder="Introduzca el e-mail"
+                    class="form-control form-control-sm mr-sm-2">
+                <input id="contrasena2" type="password" placeholder="Introduzca su contraseña"
+                    class="form-control form-control-sm mr-sm-2">
+                <button id="conectar" class="btn btn-dark my-2 my-sm-0 btn-sm">Conectar</button>
+                <button class="btn btn-danger my-2 my-sm-0 btn-sm ml-2" data-toggle="modal"
+                    data-target="#exampleModal">Registrar</button>
+            </div>
+        </nav>
+    </div>
 
-    <fieldset>
-        <legend>Regístrate</legend>
-        <label for="email1">E-mail:</label>
-        <input id="email1" type="email" placeholder="Introduzca el e-mail">
-        <label for="contrasena1">Contraseña:</label>
-        <input id="contrasena1" type="password" placeholder="Introduzca su contraseña">
-        <button id="registrar">Registrar</button>
-    </fieldset>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Formulario de Registro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <input id="email1" class="form-control" type="email" placeholder="Introduzca el e-mail">
+                        <div class="mt-2"></div>
+                        <input id="contrasena1" class="form-control" type="password" placeholder="Introduzca su contraseña">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button id="registrar" type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <fieldset>
-        <legend>Conéctate</legend>
-        <label for="email2">E-mail:</label>
-        <input id="email2" type="email" placeholder="Introduzca el e-mail">
-        <label for="contrasena2">Contraseña:</label>
-        <input id="contrasena2" type="password" placeholder="Introduzca su contraseña">
-        <button id="conectar">Conectar</button>
-    </fieldset>
-
-    <div id="contenido">
-       
+    <div class="container mt-3">
+        <div id="contenido"></div>
     </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-firestore.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyDhMuaTZGBM4tGjSyvvmRCTf4n5dEDn-PQ",
-            authDomain: "usuarios-a35e4.firebaseapp.com",
-            databaseURL: "https://usuarios-a35e4.firebaseio.com",
-            projectId: "usuarios-a35e4",
-            storageBucket: "usuarios-a35e4.appspot.com",
-            messagingSenderId: "237602566939",
-            appId: "1:237602566939:web:ed11c6f3053b0154"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="js/app.js"></script>
 </body>
