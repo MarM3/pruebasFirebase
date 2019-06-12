@@ -11,10 +11,10 @@
 </head>
 
 <body>
-    <div class="container mt-3">
+    <header class="container mt-3">
         <nav class="navbar navbar-dark bg-primary justify-content-between">
             <a class="navbar-brand">Usuarios</a>
-            <div class="form-inline">
+            <div id="botones" class="form-inline">
                 <input id="email2" type="email" placeholder="Introduzca el e-mail"
                     class="form-control form-control-sm mr-sm-2">
                 <input id="contrasena2" type="password" placeholder="Introduzca su contraseña"
@@ -22,9 +22,10 @@
                 <button id="conectar" class="btn btn-dark my-2 my-sm-0 btn-sm">Conectar</button>
                 <button class="btn btn-danger my-2 my-sm-0 btn-sm ml-2" data-toggle="modal"
                     data-target="#exampleModal">Registrar</button>
+                <span id="cerrarconexion"></span>
             </div>
         </nav>
-    </div>
+    </header>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -50,8 +51,10 @@
         </div>
     </div>
 
-    <div class="container mt-3">
-        <div id="contenido"></div>
+    <div class="container">
+        <div id="contenido">
+            <p>Conéctate para ver los contenidos exclusivos para usuarios registrados.</p>
+        </div>
     </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
