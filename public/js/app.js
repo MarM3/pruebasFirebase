@@ -294,6 +294,8 @@ function editar(parId, parTipo, parTerritorio, parFinicial, parFfinal, parCuando
   document.getElementById("ffinal").value = parFfinal;
   document.getElementById("cuando").value = parCuando;
   document.getElementById("quien").value = parQuien;
+  var bot = document.getElementById("guardar");
+  bot.innerHTML = "Editar"
 
   $("#guardar").css("display", "none");
   $(".linea").attr("disabled", true);
@@ -329,6 +331,7 @@ function editar(parId, parTipo, parTerritorio, parFinicial, parFfinal, parCuando
           document.getElementById("ffinal").value = "";
           document.getElementById("cuando").value = "";
           document.getElementById("quien").value = "";
+          bot.innerHTML = "Guardar";
           $("#guardar").css("display", "inline");
           $(".linea").attr("disabled", false);
           $("#act").empty();
@@ -403,7 +406,7 @@ function validarCuando() {
 }
 
 function validarQuien() {
-  var patron = /^(120|1[0-1][0-9]|[1-9]?[0-9])$/;
+  var patron = /^(120|1[0-1][0-9]|[1-9]?[1-9])$/;
   var qui = document.getElementById("quien").value;
 
   if (!patron.test(qui)) {
