@@ -280,12 +280,15 @@ function cargarTabla() {
 
 //Borrar datos de documentos
 function borrar(parId) {
-  db.collection("usuarios").doc(parId).delete()
+  var msj = confirm("¿Esta seguro de que quiere eliminar este territorio?");
+  if (msj === true){
+    db.collection("usuarios").doc(parId).delete()
     .then(function () {
-      console.log("Usuario eliminado correctamente.");
+      console.log("Territorio eliminado correctamente.");
     }).catch(function (error) {
-      console.error("Error borrando el usuario: ", error);
+      console.error("Error borrando el territorio: ", error);
     });
+  }
 }
 
 //Editar datos del documento
