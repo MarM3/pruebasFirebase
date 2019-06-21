@@ -135,7 +135,7 @@ function contenidosUsuarioRegistrado(usuario) {
          onchange="validarQuien();" required>
     </div>
     </div>
-    <button class="btn btn-info my-3" id="guardar" onsubmit="validaDatos();">Guardar</button>
+    <button class="btn btn-info my-3" id="guardar"><i class="fas fa-share-square"></i></button>
     <div id="act"></div>
 
     <table class="table">
@@ -225,6 +225,8 @@ function guardar() {
 
   if (ti.trim() === "" || te.trim() === "" || fi.trim() === "" || ff.trim() === "" || cu.trim() === "" || qu.trim() === "") {
     alert("Todos los datos son obligatorios.");
+  }else if (!validaDatos()){
+    return false;
   } else {
     var usuario = {
       tipo: ti,
@@ -267,8 +269,8 @@ function cargarTabla() {
         <td>${doc.data().cuando}</td>
         <td>${doc.data().quien}</td>
         <td><button class="linea btn btn-success" onclick="editar('${doc.id}', '${doc.data().tipo}', '${doc.data().territorio}',
-            '${doc.data().finicial}', '${doc.data().ffinal}', '${doc.data().cuando}', '${doc.data().quien}');">Editar</button></td>
-        <td><button class="linea btn btn-danger" onclick="borrar('${doc.id}');">Eliminar</button></td>
+            '${doc.data().finicial}', '${doc.data().ffinal}', '${doc.data().cuando}', '${doc.data().quien}');"><i class="fas fa-pen-square"></i></button></td>
+        <td><button class="linea btn btn-danger" onclick="borrar('${doc.id}');"><i class="fas fa-trash-alt"></i></button></td>
       </tr>
       `;
 
@@ -294,12 +296,10 @@ function editar(parId, parTipo, parTerritorio, parFinicial, parFfinal, parCuando
   document.getElementById("ffinal").value = parFfinal;
   document.getElementById("cuando").value = parCuando;
   document.getElementById("quien").value = parQuien;
-  var bot = document.getElementById("guardar");
-  bot.innerHTML = "Editar"
 
   $("#guardar").css("display", "none");
   $(".linea").attr("disabled", true);
-  $("#act").append("<button class='btn btn-info my-3' id='actualizar'>Guardar</button>");
+  $("#act").append("<button class='btn btn-info my-3' id='actualizar'><i class='fas fa-share-square'></i></button>");
   $("#actualizar").on("click", function () {
     var userRef = db.collection("usuarios").doc(parId);
     var ti = document.getElementById("tipo").value;
@@ -331,7 +331,6 @@ function editar(parId, parTipo, parTerritorio, parFinicial, parFfinal, parCuando
           document.getElementById("ffinal").value = "";
           document.getElementById("cuando").value = "";
           document.getElementById("quien").value = "";
-          bot.innerHTML = "Guardar";
           $("#guardar").css("display", "inline");
           $(".linea").attr("disabled", false);
           $("#act").empty();
